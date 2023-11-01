@@ -5,7 +5,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
 public class ProxyCacheService {
 
     private final LoadingCache<String, String> cache;
+
+    @Autowired private JedisConnectionFactory factory;
 
     @Autowired
     public ProxyCacheService(Environment env) {
@@ -29,7 +31,7 @@ public class ProxyCacheService {
                         new CacheLoader<>() {
                             @Override
                             public String load(String key) {
-                                JedisPool pool = new JedisPool("localhost", 6379);
+                                JedisPool pool = new JedisPool(factory.getHostName(), factory.getPort());
 
                                 try (Jedis jedis = pool.getResource()) {
                                     return jedis.get(key);

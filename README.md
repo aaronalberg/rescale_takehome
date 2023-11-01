@@ -1,7 +1,7 @@
 # Aaron Alberg Rescale Takehome
 
 ## Background
-This project implements an HTTP proxy for [Redis](insert link) as requested by Rescale
+This project implements an HTTP proxy for Redis as requested by Rescale
 
 ## High-level architecture overview.
 

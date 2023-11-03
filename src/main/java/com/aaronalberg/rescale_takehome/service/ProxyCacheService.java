@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -43,7 +44,8 @@ public class ProxyCacheService {
     public String getValue(String key) {
         try {
             return cache.get(key);
-        } catch (Exception e) {
+        } catch (ExecutionException | CacheLoader.InvalidCacheLoadException e) {
+            System.out.println("Exception when accessing cache: " + e.getMessage());
             return null;
         }
     }

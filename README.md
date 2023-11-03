@@ -101,5 +101,6 @@ The Redis client protocol bonus requirement is not supported because of its comp
 - [Google's Guava Cache](https://github.com/google/guava/wiki/CachesExplained) for simple in memory cache
 - [Docker guides](https://docs.docker.com/language/java/build-images/) for 
 guides on docker commands, docker compose, etc
+- [Embedded Redis](https://github.com/kstyrc/embedded-redis) for integration testing with redis (without needing to link multiple images)
 - Various stack overflow posts for help with getting the above libraries versions working properly
 and connecting to the backing redis instance
